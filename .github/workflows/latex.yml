@@ -1,0 +1,19 @@
+name: Build document with LaTeX
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install texlive-full
+      run: sudo apt-get install texlive-full
+    - name: Run a multi-line script
+      run: (cd latex; latexmk -pdf main.tex)
+    - uses: actions/upload-artifact@v1
+      with:
+        name: main.pdf document
+        path: latex/main.pdf
