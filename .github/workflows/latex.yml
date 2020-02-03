@@ -9,8 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install texlive-full
-      run: sudo apt-get install texlive-full
+    - name: Install texlive-extra
+      run: (sudo apt-get update; sudo apt-get install texlive-full)
     - name: Run a multi-line script
       run: (cd latex; latexmk -pdf main.tex)
     - uses: actions/upload-artifact@v1
