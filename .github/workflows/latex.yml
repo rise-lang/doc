@@ -1,6 +1,6 @@
 name: Build document with LaTeX
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   build:
