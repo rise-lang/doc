@@ -28,9 +28,10 @@
         {\typd{\Pi}{\Gamma}{\lambda \x.\Prog}{\TYone \to \TYtwo}}
   
         \inferrule* [right=App]
-        {\typd{\Pi}{\Gamma_1}{\Progone}{\TYone \to \TYtwo} \\
-          \typd{\Pi}{\Gamma_2}{\Progtwo}{\TYone}}
-        {\typd{\Pi}{\Gamma_1, \Gamma_2}{\Progone~\Progtwo}{\TYtwo}}\medskip
+        {\typd{\Pi}{\Gamma_1}{\Progone}{\TYone \to \TYthree} \\
+          \typd{\Pi}{\Gamma_2}{\Progtwo}{\TYtwo} \\
+          \TYtwo <: \TYone}
+        {\typd{\Pi}{\Gamma_1, \Gamma_2}{\Progone~\Progtwo}{\TYthree}}\medskip
       \end{mathpar}
 
       \begin{mathpar}
@@ -62,11 +63,24 @@
   
     \begin{minipage}{1.0\linewidth}
       \begin{mathpar}
-          \inferrule*[right=Write Literal]
-          {\typd{\Pi}{\Gamma}{\Prog}{\tyexp{\basic}{\readacc}}}
-          {\typd{\Pi}{\Gamma}{\Prog}{\tyexp{\basic}{\writeacc}}}
+          \inferrule*[right=S-noAT]
+          {noAT(T)}
+          {\tyexp{T}{\readacc} <: \tyexp{T}{\writeacc}}
+
+          \inferrule*[right=S-Arrow]
+          {\TYthree <: \TYone \\
+            \TYtwo <: \TYfour}
+          {\TYone \to \TYtwo <: \TYthree \to \TYfour}
+
+          noAT(T) =
+          \begin{cases}
+              \text{true},& T = \basic\arcr
+              noAT(T_1) \land noAT(T_2),& T = T_1 \times T_2\arcr
+              \text{false},& \text{otherwise}
+          \end{cases}
+
       \end{mathpar}
-      \subcaption{Access conversion rule}\label{fig:dpia-access-conversion-rule}
+      \subcaption{Subtyping Rules}\label{fig:dpia-access-conversion-rule}
     \end{minipage}
   
     % \medskip

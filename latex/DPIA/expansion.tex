@@ -14,10 +14,10 @@
   \begin{displaymath}
     \prim{reduceSeqI}
     =
-    \Lambda n~a~\dtone~\dttwo.\lambda f\,\mathit{init}~\mathit{xs}~c.~\prim{new}~a~\dttwo~(\lambda \mathit{acc}.~
+    \Lambda n~\dtone~\dttwo.\lambda f\,\mathit{init}~\mathit{xs}~c.~\prim{new}~\dttwo~(\lambda \mathit{acc}.~
       \begin{array}[t]{@{}l}
-      \semA{init}(acc.w)\\
-      \prim{for}~n~(\lambda i.~f\,(\ei)~(acc.r)~(acc.w)\ );\\
+      \semA{init}(acc.w);\\
+      \prim{for}~n~(\lambda i.~f\,(acc.r)~(\ei)~(acc.w)\ );\\
       c~(acc.r)\ )
       \end{array}
 \end{displaymath}
